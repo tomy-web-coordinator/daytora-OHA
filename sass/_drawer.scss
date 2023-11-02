@@ -1,0 +1,38 @@
+@use "./mq" as *;
+@use "./variables" as *;
+@use "./common" as *;
+
+.drawer-content {
+  width: 320px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #f7ba1a;
+  z-index: 50;
+  padding: 86px 40px 40px;
+  //   これで通常時は画面の右側に隠す
+  transform: translateX(100%);
+  transition: transform 0.3s linear;
+
+  &.is-checked {
+    transform: translateX(0);
+  }
+
+  //   &__menu {
+  //   }
+
+  &__link {
+    display: block;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    text-align: right;
+    font-weight: 700;
+    letter-spacing: 0.48px;
+  }
+
+  &__button {
+    margin-top: 14px;
+    text-align: right;
+  }
+}

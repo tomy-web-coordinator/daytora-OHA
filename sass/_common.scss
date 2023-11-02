@@ -1,0 +1,143 @@
+@use "./mq" as *;
+@use "./variables" as *;
+
+// cssでもスムーススクロールを実装できるが、
+// あまり汎用性が高くないから基本はJavaScriptで実装する。
+// html {
+//   scroll-behavior: smooth; //auto or smooth
+// }
+
+body {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-base;
+  background-color: $background-base;
+  font-family: $font-family-ja;
+}
+
+// 共通inner
+.inner {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  @include mq(pc) {
+    max-width: calc($width-inner + 30px * 2);
+    padding: 0 30px;
+    margin: 0 auto;
+  }
+}
+
+// 共通ボタン
+.button {
+  display: inline-block;
+  padding: calc(10px - 2px) calc(30px - 2px);
+  font-weight: 700;
+  letter-spacing: 0.48px;
+  border-radius: 60px;
+  // currentColorで当たっている値を引き継げる
+  border: 2px solid currentColor;
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $color-base;
+  min-width: 150px;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #fabe00;
+  }
+
+  &--type2 {
+    background-color: #111;
+    color: #fff;
+
+    &:hover {
+      background-color: #fff;
+      color: #111;
+    }
+  }
+}
+
+// 共通sectionタイトル
+.heading {
+  text-align: center;
+  font-family: $font-family-en;
+
+  &__en {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 100%; /* 38px */
+    letter-spacing: 3.8px;
+
+    @include mq(pc) {
+      font-size: 50px;
+      letter-spacing: 5px;
+    }
+  }
+  &__ja {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 1.12px;
+    margin-top: 14px;
+
+    @include mq(pc) {
+      font-size: 16px;
+      letter-spacing: 1.28px;
+    }
+  }
+}
+
+// pc画面で非表示
+.hidden-pc {
+  @include mq(pc) {
+    display: none;
+  }
+}
+
+// スマホ画面で非表示
+.hidden-sp {
+  @include mq(sp) {
+    display: none;
+  }
+}
+
+// 自動改行
+.inline-block {
+  font-weight: inherit;
+  display: inline-block;
+}
+
+// 最初見えなくて、is-in-viewが付与されると
+// したから浮き上がる
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s, transform 1s;
+
+  &.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s;
+
+  &.is-in-view {
+    opacity: 1;
+  }
+}
+
+.fade-in-down {
+  opacity: 0;
+  transform: translateY(-24px);
+  transition: opacity 1s, transform 1s;
+
+  &.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

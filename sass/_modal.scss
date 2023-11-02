@@ -1,0 +1,65 @@
+@use "./mq" as *;
+@use "./variables" as *;
+@use "./common" as *;
+@use "./drawer" as *;
+
+// .about-modal
+.about-modal {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-width: calc(100% - 15px * 2);
+  max-height: calc(100% - 20px * 2);
+  overflow: auto;
+  padding: 16px 15px 64px;
+  border-radius: 20px;
+  background: #fff;
+  border: none;
+  z-index: 60;
+  //   モーダル内をスクロールした時に、背景がスクロールするのを
+  //   防ぐプロパティ
+  overscroll-behavior-y: none;
+
+  @include mq(pc) {
+    max-width: 1140px;
+    padding: 49px 70px 75px;
+  }
+
+  &::backdrop {
+    opacity: 0.2;
+    background: #000;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+  }
+  &__close-icon {
+    img {
+      width: 37px;
+    }
+  }
+  &__body {
+    margin-top: 12px;
+
+    @include mq(pc) {
+      margin-top: 43px;
+    }
+    p {
+      font-size: 14px;
+
+      @include mq(pc) {
+        font-size: 16px;
+      }
+
+      &:nth-child(n + 2) {
+        margin-top: 20px;
+      }
+    }
+  }
+  &__close-button {
+    margin-top: 30px;
+    text-align: center;
+  }
+}

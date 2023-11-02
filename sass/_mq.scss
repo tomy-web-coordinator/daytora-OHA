@@ -1,0 +1,12 @@
+@use "sass:map";
+$breakpoints: (
+  "sp": "not screen and (min-width: 768px)",
+  //   "tb": "screen and (min-width: 600px)",
+  "pc": "screen and (min-width: 768px)",
+) !default;
+
+@mixin mq($breakpoint: "pc") {
+  @media #{map.get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
